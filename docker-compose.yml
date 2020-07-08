@@ -13,6 +13,19 @@ services:
       TZ: "Asia/Tokyo"
     ports:
       - "3307:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    links:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
   nginx:
     restart: always
     image: "nginx:mainline-alpine"
